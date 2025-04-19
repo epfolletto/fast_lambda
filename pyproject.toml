@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "fast-lambda"
+version = "0.1.0"
+description = ""
+authors = ["evandro <evandrofolletto@gmail.com>"]
+readme = "README.md"
+packages = [{include = "fast_lambda"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.115.12"
+uvicorn = "^0.34.1"
+mangum = "^0.19.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
