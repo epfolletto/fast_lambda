@@ -7,4 +7,4 @@ lambda_handler = Mangum(app)
 
 @app.get("/")
 def read_root():
-    return {"message": "Hello, FastAPI! número 4"}
+    return {"message": "Hello, FastAPI! número 5"}
