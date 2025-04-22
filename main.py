@@ -12,4 +12,4 @@ def read_root():
 
 @app.get("/listagem")
 def other_fc():
-    return {"message": "Estou na rota de listagem 2!!"}
+    return {"message": "Estou na rota de listagem 3!!"}
