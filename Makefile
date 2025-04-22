@@ -4,16 +4,16 @@ run:
 	poetry run uvicorn main:app --reload
 
 image-build: 
-	docker build -t fast_lambda .
+	docker build -t ${IMAGE_NAME} .
 
 image-push:
-	aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin 932769097131.dkr.ecr.${REGION}.amazonaws.com
-	docker tag fast_lambda:latest ${USER_ID}.dkr.ecr.${REGION}.amazonaws.com/evandro:latest
-	docker push ${USER_ID}.dkr.ecr.${REGION}.amazonaws.com/evandro:latest
+	aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${USER_ID}.dkr.ecr.${REGION}.amazonaws.com
+	docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${USER_ID}.dkr.ecr.${REGION}.amazonaws.com/${REPOSITORY_NAME}:${REPOSITORY_TAG}
+	docker push ${USER_ID}.dkr.ecr.${REGION}.amazonaws.com/${REPOSITORY_NAME}:${REPOSITORY_TAG}
 
 image-update-lambda:
 	aws lambda update-function-code \
-		--function-name fast_lambda \
-		--image-uri ${USER_ID}.dkr.ecr.${REGION}.amazonaws.com/evandro:latest
+		--function-name ${IMAGE_NAME} \
+		--image-uri ${USER_ID}.dkr.ecr.${REGION}.amazonaws.com/${REPOSITORY_NAME}:${REPOSITORY_TAG}
 
 deploy: image-build image-push image-update-lambda
