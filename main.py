@@ -11,5 +11,5 @@ def read_root():
 
 
 @app.get("/listagem")
-def read_root():
+def other_fc():
     return {"message": "Estou na rota de listagem!!"}
